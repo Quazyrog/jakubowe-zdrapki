@@ -1,0 +1,67 @@
+.Week {
+    display: flex;
+}
+
+.Week .Day {
+    --the-day-colour-fg: brown;
+    --the-day-colour-bg: gold;
+    color: var(--the-day-colour-fg);
+    margin: 12px;
+    flex: 1;
+    min-height: 12em;
+    height: 14vh;
+    display: grid;
+    grid-template-areas: "DayNum DayName" "Month Month" "Task Task";
+    grid-template-columns: 2em 1fr;
+    grid-template-rows: auto auto 1fr;
+    border: 2px solid var(--the-day-colour-fg);
+}
+
+.Week .Day .DayInMonthNumber {
+    grid-area: DayNum;
+    text-align: right;
+    background: var(--the-day-colour-bg);
+}
+
+.Week .Day .DayMonthName {
+    grid-area: Month;
+    font-size: 80%;
+    padding-bottom: 3px;
+    background: var(--the-day-colour-bg);
+    border-bottom: 1px solid var(--the-day-colour-fg);;
+}
+
+.Week .Day .DayName {
+    grid-area: DayName;
+    text-align: right;
+    padding-right: 3px;
+    padding-top: 3px;
+    background: var(--the-day-colour-bg);
+}
+
+.Week .Day .DayTaskText {
+    grid-area: Task;
+    padding: 5px;
+    text-align: center;
+    font-size: 125%;
+}
+
+.Week .Day.Today {
+    --the-day-colour-fg: blue;
+    --the-day-colour-bg: cornflowerblue;
+}
+
+.Week .Day.Done {
+    --the-day-colour-fg: green;
+    --the-day-colour-bg: lime;
+}
+
+.Week .Day.Missed {
+    --the-day-colour-fg: red;
+    --the-day-colour-bg: pink;
+}
+
+.Week .Day.Out {
+    --the-day-colour-fg: black;
+    --the-day-colour-bg: gray;
+}
