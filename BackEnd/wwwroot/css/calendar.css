@@ -1,5 +1,7 @@
 .Week {
-    display: flex;
+    display: grid;
+    grid-template-areas: "Monday Tuesday Wednesday Thursday Friday Saturday Sunday";
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 
 .Week .Day {
@@ -46,6 +48,11 @@
     font-size: 125%;
 }
 
+.Week .Day.Missed {
+    --the-day-colour-fg: red;
+    --the-day-colour-bg: pink;
+}
+
 .Week .Day.Today {
     --the-day-colour-fg: blue;
     --the-day-colour-bg: cornflowerblue;
@@ -54,14 +61,4 @@
 .Week .Day.Done {
     --the-day-colour-fg: green;
     --the-day-colour-bg: lime;
-}
-
-.Week .Day.Missed {
-    --the-day-colour-fg: red;
-    --the-day-colour-bg: pink;
-}
-
-.Week .Day.Out {
-    --the-day-colour-fg: black;
-    --the-day-colour-bg: gray;
 }

@@ -53,99 +53,95 @@
             <div class="DayTaskText">Przed modlitwą napij się herbaty.</div>
         </div>
     </section>
-    <section class="Week">
-        <div class="Day">
-            <div class="DayInMonthNumber">28</div>
-            <div class="DayMonthName">listopada</div>
-            <div class="DayName">I Niedziela</div>
-            <div class="DayTaskText">Przed modlitwą napij się herbaty.</div>
-        </div>
-        <div class="Day">
-            <div class="DayInMonthNumber">29</div>
-            <div class="DayMonthName">listopada</div>
-            <div class="DayName">Poniedziałek</div>
-            <div class="DayTaskText">Przed modlitwą napij się herbaty.</div>
-        </div>
-        <div class="Day">
-            <div class="DayInMonthNumber">30</div>
-            <div class="DayMonthName">grudnia</div>
-            <div class="DayName">Wtorek</div>
-            <div class="DayTaskText">Przed modlitwą napij się herbaty.</div>
-        </div>
-        <div class="Day">
-            <div class="DayInMonthNumber">1</div>
-            <div class="DayMonthName">grudnia</div>
-            <div class="DayName">Środa</div>
-            <div class="DayTaskText">Przed modlitwą napij się herbaty.</div>
-        </div>
-        <div class="Day">
-            <div class="DayInMonthNumber">2</div>
-            <div class="DayMonthName">grudnia</div>
-            <div class="DayName">Czwartek</div>
-            <div class="DayTaskText">Przed modlitwą napij się herbaty.</div>
-        </div>
-        <div class="Day">
-            <div class="DayInMonthNumber">3</div>
-            <div class="DayMonthName">grudnia</div>
-            <div class="DayName">Piątek</div>
-            <div class="DayTaskText">Przed modlitwą napij się herbaty.</div>
-        </div>
-        <div class="Day">
-            <div class="DayInMonthNumber">4</div>
-            <div class="DayMonthName">grudnia</div>
-            <div class="DayName">Sobota</div>
-            <div class="DayTaskText">Przed modlitwą napij się herbaty.</div>
-        </div>
-    </section>
-    <section class="Week">
-        <div class="Day">
-            <div class="DayInMonthNumber">28</div>
-            <div class="DayMonthName">listopada</div>
-            <div class="DayName">I Niedziela</div>
-            <div class="DayTaskText">Przed modlitwą napij się herbaty.</div>
-        </div>
-        <div class="Day">
-            <div class="DayInMonthNumber">29</div>
-            <div class="DayMonthName">listopada</div>
-            <div class="DayName">Poniedziałek</div>
-            <div class="DayTaskText">Przed modlitwą napij się herbaty.</div>
-        </div>
-        <div class="Day">
-            <div class="DayInMonthNumber">30</div>
-            <div class="DayMonthName">grudnia</div>
-            <div class="DayName">Wtorek</div>
-            <div class="DayTaskText">Przed modlitwą napij się herbaty.</div>
-        </div>
-        <div class="Day">
-            <div class="DayInMonthNumber">1</div>
-            <div class="DayMonthName">grudnia</div>
-            <div class="DayName">Środa</div>
-            <div class="DayTaskText">Przed modlitwą napij się herbaty.</div>
-        </div>
-        <div class="Day">
-            <div class="DayInMonthNumber">2</div>
-            <div class="DayMonthName">grudnia</div>
-            <div class="DayName">Czwartek</div>
-            <div class="DayTaskText">Przed modlitwą napij się herbaty.</div>
-        </div>
-        <div class="Day">
-            <div class="DayInMonthNumber">3</div>
-            <div class="DayMonthName">grudnia</div>
-            <div class="DayName">Piątek</div>
-            <div class="DayTaskText">Przed modlitwą napij się herbaty.</div>
-        </div>
-        <div class="Day Out">
-            <div class="DayInMonthNumber">4</div>
-            <div class="DayMonthName">grudnia</div>
-            <div class="DayName">Sobota</div>
-            <div class="DayTaskText">Przed modlitwą napij się herbaty.</div>
-        </div>
-    </section>
 </section>
 
-<script src="js/api.js" asp-append-version="true"></script>
+<script src="js/api.js"></script>
+<script src="js/storage.js"></script>
 <script type="text/javascript">
-    getTodayTask();
+    const CALENDAR_NAME = 'adwent2022';
+    const doneDays = new DoneDaysStorage(CALENDAR_NAME);
+    
+    function getTodayDate()
+    {
+        return new Date('2022-12-10');
+    }
+    
+    function renderCalendar(daysInCalendar)
+    {
+        const calendarElement = document.getElementById('calendar');
+        calendarElement.innerHTML = '';
+        
+        function addWeekElement()
+        {
+            const elt = document.createElement('section');
+            elt.classList.add('Week');
+            calendarElement.appendChild(elt);
+            return elt;
+        }
+
+        const weekDayClasses = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+        const localMonthNames = ['stycznia', 'lutego', 'marca', 'kwietnia', 'maja', 'czerwca', 'lipca', 'sierpnia',
+            'września', 'października', 'listopada', 'grudnia'];
+        function addDayElement(weekElement, dayData, dayClass)
+        {
+            let elt = document.createElement('div');
+            elt.dataset.date = dayData.date.toISOString();
+            elt.onclick = handleClick;
+            elt.classList.add('Day');
+            if (dayClass !== null) {
+                elt.classList.add(dayClass);
+            }
+            elt.style.gridArea = weekDayClasses[dayData.date.getDay()];
+            elt.innerHTML = `<div class="DayInMonthNumber">${dayData.date.getDate()}</div>
+                <div class="DayMonthName">${localMonthNames[dayData.date.getMonth()]}</div>
+                <div class="DayName">${dayData.name}</div>
+                <div class="DayTaskText">${dayData.taskText || "???"}</div>`;
+            weekElement.appendChild(elt);
+        }
+        
+        const todayDate = getTodayDate();
+        let currentWeekElement = null;
+        let currentWeekNum = null;
+        for (let day of daysInCalendar) {
+            if (currentWeekNum !== day.weekNumber) {
+                currentWeekElement = addWeekElement();
+                currentWeekNum = day.weekNumber;
+            }
+            let dayClass = null;
+            if (
+                todayDate.getDate() === day.date.getDate() 
+                && todayDate.getMonth() === day.date.getMonth() 
+                && todayDate.getYear() === day.date.getYear()
+            ) {
+                dayClass = 'Today';
+            }
+            if (day.date <= todayDate) {
+                dayClass = doneDays.isDayTaskDone(day.date) ? 'Done' : 'Missed';
+            }
+            addDayElement(currentWeekElement, day, dayClass);
+        }
+    }
+    
+    function handleClick(event)
+    {
+        const todayDate = getTodayDate();
+        const yesterdayDate = getTodayDate();
+        yesterdayDate.setDate(yesterdayDate.getDate() - 1);
+        const clickedDate = new Date(this.dataset.date);
+        if (yesterdayDate <= clickedDate && clickedDate <= todayDate) {
+            if (doneDays.isDayTaskDone(clickedDate)) {
+                doneDays.markTaskNotDone(clickedDate);
+                this.classList.remove('Done');
+                this.classList.add('Missed');
+            } else {
+                doneDays.markTaskDone(clickedDate);
+                this.classList.remove('Missed');
+                this.classList.add('Done');
+            }
+        }
+    }
+    
+    getCalendar(CALENDAR_NAME).then(calendar => renderCalendar(calendar));
 </script>
 
 </body>
