@@ -1,4 +1,6 @@
 body {
     margin: auto;
     max-width: 2080px;
+    background: #FCFDF2;
+    overflow-x: hidden;
 }

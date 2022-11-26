@@ -1,3 +1,7 @@
+.Calendar {
+    margin: 100px auto 100px auto;
+}
+
 .Week {
     display: grid;
     grid-template-areas: "Monday Tuesday Wednesday Thursday Friday Saturday Sunday";
@@ -5,9 +9,9 @@
 }
 
 .Week .Day {
-    --the-day-colour-fg: brown;
-    --the-day-colour-bg: gold;
-    color: var(--the-day-colour-fg);
+    --the-day-colour-fg: #3B3486;
+    --the-day-colour-bg: #3B3486;
+    background: #FFE9B1;
     margin: 12px;
     flex: 1;
     min-height: 12em;
@@ -25,10 +29,16 @@
     background: var(--the-day-colour-bg);
 }
 
+.DayHeadPart {
+    font-weight: bold;
+    color: #FFE9B1;
+}
+
 .Week .Day .DayMonthName {
     grid-area: Month;
     font-size: 80%;
     padding-bottom: 3px;
+    padding-left: 3px;
     background: var(--the-day-colour-bg);
     border-bottom: 1px solid var(--the-day-colour-fg);;
 }
@@ -48,17 +58,26 @@
     font-size: 125%;
 }
 
-.Week .Day.Missed {
-    --the-day-colour-fg: red;
-    --the-day-colour-bg: pink;
-}
-
 .Week .Day.Today {
-    --the-day-colour-fg: blue;
-    --the-day-colour-bg: cornflowerblue;
+    --the-day-colour-bg: #7743DB;
 }
 
-.Week .Day.Done {
-    --the-day-colour-fg: green;
-    --the-day-colour-bg: lime;
+.Week .Day.Done .DayTaskText {
+    background: url("/img/candle.png") no-repeat center #FFE9B1;
+    background-size: contain;
+}
+
+.Week .Day.Future {
+    --the-day-colour-bg: #a477ff;
+}
+
+.Holly {
+    position: absolute;
+    left: 0;
+    transform: translateY(-60%) scaleY(-1);
+    z-index: -1;
+    width: 100vw;
+    height: 20vh;
+    background: url("/img/Holly-161840_1280.png") bottom center;
+    background-size: contain;
 }

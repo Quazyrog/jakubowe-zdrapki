@@ -2,16 +2,18 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>To-do CRUD</title>
+    <title>Kalendarz Adwentowy</title>
     <link rel="stylesheet" href="css/main.css" />
     <link rel="stylesheet" href="css/calendar.css" />
 </head>
 <body>
 
+<div class="Holly"></div>
+
 <section id="calendar" class="Calendar">
     <section class="Week">
         <div class="Day Done">
-            <div class="DayInMonthNumber">28</div>
+            <div class="DayInMonthNumber DayHeadPart">28</div>
             <div class="DayMonthName">listopada</div>
             <div class="DayName">I Niedziela</div>
             <div class="DayTaskText">Przed modlitwą napij się herbaty.</div>
@@ -55,6 +57,8 @@
     </section>
 </section>
 
+<div class="Holly"></div>
+
 <script src="js/api.js"></script>
 <script src="js/storage.js"></script>
 <script type="text/javascript">
@@ -88,13 +92,13 @@
             elt.dataset.date = dayData.date.toISOString();
             elt.onclick = handleClick;
             elt.classList.add('Day');
-            if (dayClass !== null) {
-                elt.classList.add(dayClass);
+            for (let c of dayClass) {
+                elt.classList.add(c);
             }
             elt.style.gridArea = weekDayClasses[dayData.date.getDay()];
-            elt.innerHTML = `<div class="DayInMonthNumber">${dayData.date.getDate()}</div>
-                <div class="DayMonthName">${localMonthNames[dayData.date.getMonth()]}</div>
-                <div class="DayName">${dayData.name}</div>
+            elt.innerHTML = `<div class="DayInMonthNumber DayHeadPart">${dayData.date.getDate()}</div>
+                <div class="DayMonthName DayHeadPart">${localMonthNames[dayData.date.getMonth()]}</div>
+                <div class="DayName DayHeadPart">${dayData.name}</div>
                 <div class="DayTaskText">${dayData.taskText || "???"}</div>`;
             weekElement.appendChild(elt);
         }
@@ -107,18 +111,20 @@
                 currentWeekElement = addWeekElement();
                 currentWeekNum = day.weekNumber;
             }
-            let dayClass = null;
+            let dayClasses = [];
             if (
                 todayDate.getDate() === day.date.getDate() 
                 && todayDate.getMonth() === day.date.getMonth() 
                 && todayDate.getYear() === day.date.getYear()
             ) {
-                dayClass = 'Today';
+                dayClasses.push('Today');
             }
             if (day.date <= todayDate) {
-                dayClass = doneDays.isDayTaskDone(day.date) ? 'Done' : 'Missed';
+                dayClasses.push(doneDays.isDayTaskDone(day.date) ? 'Done' : 'Missed');
+            } else if (day.date > todayDate) {
+                dayClasses.push('Future');
             }
-            addDayElement(currentWeekElement, day, dayClass);
+            addDayElement(currentWeekElement, day, dayClasses);
         }
     }
     
@@ -141,6 +147,24 @@
         }
     }
     
+    
+    function resetAtMidnight() {
+        const now = new Date();
+        const night = new Date(
+            now.getFullYear(),
+            now.getMonth(),
+            now.getDate() + 1, // the next day, ...
+            0, 0, 0 // ...at 00:00:00 hours
+        );
+        const msToMidnight = night.getTime() - now.getTime();
+
+        setTimeout(function() {
+            getCalendar(CALENDAR_NAME).then(calendar => renderCalendar(calendar));
+            resetAtMidnight();
+        }, msToMidnight);
+    }
+    
+    resetAtMidnight();
     getCalendar(CALENDAR_NAME).then(calendar => renderCalendar(calendar));
 </script>
 
