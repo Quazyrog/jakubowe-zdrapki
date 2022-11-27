@@ -1,0 +1,58 @@
+.Scratchie {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(calc(-50% + 25px), calc(-50% + 25px));
+    margin: 0 auto;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    z-index: 2;
+    display: none;
+    padding: 25px;
+    background: #a477ff;
+    border: 5px solid #3B3486;
+    box-shadow: black 0 0 8px;
+}
+
+.ScratchieCanvas {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    width: calc(100% - 50px);
+    height: calc(100% - 50px);
+    transition: opacity 1s;
+}
+
+.ScratchieContent {
+    padding: 25px;
+    width: 40vw;
+    height: 40vh;
+    background: #FFE9B1;
+    font-size: 140%;
+    text-align: center;
+    min-width: 600px;
+    min-height: 350px;
+}
+
+.ScratchieContent h2 {
+    margin: 0;
+}
+
+#scratchie_overlay {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    opacity: 0.5;
+    background: gray;
+    visibility: hidden;
+}
+
+#scratchie_instr {
+    font-size: 40%;
+}

@@ -4,7 +4,7 @@ class DoneDaysStorage
 {
     static _dateToString(date)
     {
-        return `${date.getDate()}.${date.getMonth()+1}.${date.getFullYear()}`;
+        return date.toISOString().substring(0,10);
     }
     
     constructor(calendarName)

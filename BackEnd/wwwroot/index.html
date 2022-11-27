@@ -5,6 +5,7 @@
     <title>Kalendarz Adwentowy</title>
     <link rel="stylesheet" href="css/main.css" />
     <link rel="stylesheet" href="css/calendar.css" />
+    <link rel="stylesheet" href="css/scratchie.css" />
 </head>
 <body>
 
@@ -59,15 +60,29 @@
 
 <div class="Holly"></div>
 
+<div class="Scratchie" id="scratchie">
+    <canvas class="ScratchieCanvas" id="scratchie_canvas"></canvas>
+    <div class="ScratchieContent">
+        <h2 id="scratchie_today"></h2>
+        <p id="scratchie_task"></p>
+        <p id="scratchie_instr">
+            Kiedy już wykonasz zadanie, naciśnij na dzisiejszym dniu w kalendarzu, aby oznaczyć je jako zrobione.
+            Podobnie możesz oznaczać także zadania z poprzedniego dnia.
+        </p>
+    </div>
+</div>
+<div id="scratchie_overlay"></div>
+
 <script src="js/api.js"></script>
 <script src="js/storage.js"></script>
+<script src="js/scratchie.js"></script>
 <script type="text/javascript">
     const CALENDAR_NAME = 'adwent2022';
     const doneDays = new DoneDaysStorage(CALENDAR_NAME);
     
     function getTodayDate()
     {
-        return new Date('2022-12-10');
+        return new Date();
     }
     
     function renderCalendar(daysInCalendar)
@@ -118,6 +133,9 @@
                 && todayDate.getYear() === day.date.getYear()
             ) {
                 dayClasses.push('Today');
+                console.log(day);
+                document.getElementById('scratchie_today').textContent = day.name;
+                document.getElementById('scratchie_task').textContent = day.taskText;
             }
             if (day.date <= todayDate) {
                 dayClasses.push(doneDays.isDayTaskDone(day.date) ? 'Done' : 'Missed');
@@ -148,7 +166,21 @@
     }
     
     
-    function resetAtMidnight() {
+    function checkIn()
+    {
+        localStorage.setItem('last_check_in', getTodayDate().toISOString().substring(0,10));
+    }
+    
+    
+    function mainReload() {
+        getCalendar(CALENDAR_NAME).then(calendar => renderCalendar(calendar));
+        let lastCheckIn = localStorage.getItem('last_check_in');
+        console.log(`Last check in: ${lastCheckIn}`)
+        if (!lastCheckIn || lastCheckIn < getTodayDate().toISOString().substring(0,10))
+        {
+            showScratchcard(checkIn);
+        }
+        
         const now = new Date();
         const night = new Date(
             now.getFullYear(),
@@ -160,12 +192,11 @@
 
         setTimeout(function() {
             getCalendar(CALENDAR_NAME).then(calendar => renderCalendar(calendar));
-            resetAtMidnight();
+            mainReload();
         }, msToMidnight);
     }
     
-    resetAtMidnight();
-    getCalendar(CALENDAR_NAME).then(calendar => renderCalendar(calendar));
+    mainReload()
 </script>
 
 </body>
