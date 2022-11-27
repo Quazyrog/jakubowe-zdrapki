@@ -4,3 +4,9 @@ body {
     background: #FCFDF2;
     overflow-x: hidden;
 }
+
+@media (max-width : 1280px) {
+    body {
+        font-size: 10pt;
+    }
+}

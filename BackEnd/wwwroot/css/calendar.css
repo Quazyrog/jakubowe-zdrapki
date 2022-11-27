@@ -80,3 +80,26 @@
     background: url("/img/Holly-161840_1280.png") bottom center;
     background-size: contain;
 }
+
+
+@media (max-width : 1280px) {
+    .Week .Day * {
+        padding: 0 !important;
+    }
+    .Week .Day {
+        margin: 0 !important;
+        grid-template-columns: 2em 1fr !important;
+    }
+    .Week .Day .DayInMonthNumber {
+        font-size: 50% !important;
+    }
+    .Week .Day .DayMonthName {
+        font-size: 48% !important;
+    }
+    .Week .Day .DayName {
+        font-size: 60% !important;
+    }
+    .Week .Day .DayTaskText {
+        font-size: 80% !important;
+    }
+}
