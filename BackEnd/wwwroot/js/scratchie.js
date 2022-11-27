@@ -36,13 +36,13 @@ function showScratchcard(onShown) {
     ctx.textAlign = 'center';
     ctx.fillText(SCRATCH_TEXT, canvasWidth / 2, canvasHeight / 2);
 
-    document.addEventListener('mousedown', handleMouseDown, false);
-    document.addEventListener('touchstart', handleMouseDown, false);
-    canvas.addEventListener('mousemove', handleMouseMove, false);
-    canvas.addEventListener('touchmove', handleMouseMove, false);
-    document.addEventListener('mouseup', handleMouseUp, false);
-    document.addEventListener('touchend', handleMouseUp, false);
-
+    canvas.addEventListener('mousedown', handleMouseDown);
+    canvas.addEventListener('touchstart', handleMouseDown);
+    canvas.addEventListener('mousemove', handleMouseMove);
+    canvas.addEventListener('touchmove', handleMouseMove);
+    canvas.addEventListener('mouseup', handleMouseUp);
+    canvas.addEventListener('touchend', handleMouseUp);
+    
     function distanceBetween(point1, point2) {
         return Math.sqrt(Math.pow(point2.x - point1.x, 2) + Math.pow(point2.y - point1.y, 2));
     }
@@ -74,7 +74,12 @@ function showScratchcard(onShown) {
 
     function getMouse(e, canvas) {
         const rect = canvas.getBoundingClientRect();
-        return {x: e.x - rect.left + 25, y: e.y - rect.top + 25};
+        console.log(e);
+        if (e instanceof MouseEvent) {
+            return {x: e.pageX - rect.left + 25, y: e.pageY - rect.top + 25};
+        } else if (e instanceof TouchEvent) {
+            return {x: e.changedTouches[0].pageX - rect.left + 25, y: e.changedTouches[0].pageY - rect.top + 25};
+        }
     }
 
     function handlePercentage(filledInPixels) {
@@ -90,15 +95,15 @@ function showScratchcard(onShown) {
     }
 
     function handleMouseDown(e) {
+        e.preventDefault();
         isDrawing = true;
         lastPoint = getMouse(e, canvas);
     }
 
     function handleMouseMove(e) {
-        if (!isDrawing) { return; }
-
         e.preventDefault();
-
+        if (!isDrawing) { return; }
+        
         var currentPoint = getMouse(e, canvas),
             dist = distanceBetween(lastPoint, currentPoint),
             angle = angleBetween(lastPoint, currentPoint),
@@ -120,6 +125,7 @@ function showScratchcard(onShown) {
     }
 
     function handleMouseUp(e) {
+        e.preventDefault();
         isDrawing = false;
     }
 }

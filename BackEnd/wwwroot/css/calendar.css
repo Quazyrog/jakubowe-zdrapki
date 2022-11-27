@@ -15,12 +15,12 @@
     margin: 12px;
     flex: 1;
     min-height: 12em;
-    height: 14vh;
     display: grid;
     grid-template-areas: "DayNum DayName" "Month Month" "Task Task";
     grid-template-columns: 2em 1fr;
     grid-template-rows: auto auto 1fr;
     border: 2px solid var(--the-day-colour-fg);
+    word-break: break-word;
 }
 
 .Week .Day .DayInMonthNumber {
@@ -55,7 +55,6 @@
     grid-area: Task;
     padding: 5px;
     text-align: center;
-    font-size: 125%;
 }
 
 .Week .Day.Today {
