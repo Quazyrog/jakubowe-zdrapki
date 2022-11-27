@@ -82,24 +82,11 @@
 }
 
 
-@media (max-width : 1280px) {
-    .Week .Day * {
-        padding: 0 !important;
-    }
-    .Week .Day {
-        margin: 0 !important;
-        grid-template-columns: 2em 1fr !important;
-    }
-    .Week .Day .DayInMonthNumber {
-        font-size: 50% !important;
-    }
-    .Week .Day .DayMonthName {
-        font-size: 48% !important;
-    }
-    .Week .Day .DayName {
-        font-size: 60% !important;
-    }
-    .Week .Day .DayTaskText {
-        font-size: 80% !important;
+@media (min-resolution: 2dppx) {
+    .Week {
+        display: grid;
+        grid-template-areas: "Monday Tuesday" "Wednesday Thursday" "Friday Saturday" "Sunday Sunday";
+        grid-template-columns: 1fr 1fr;
+        margin-bottom: 10px;
     }
 }
