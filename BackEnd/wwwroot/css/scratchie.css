@@ -31,10 +31,13 @@
     width: 40vw;
     height: 40vh;
     background: #FFE9B1;
-    font-size: 140%;
     text-align: center;
     min-width: 600px;
     min-height: 350px;
+}
+
+#scratchie_task {
+    font-size: 150%;
 }
 
 .ScratchieContent h2 {
@@ -51,8 +54,4 @@
     opacity: 0.5;
     background: gray;
     visibility: hidden;
-}
-
-#scratchie_instr {
-    font-size: 40%;
 }

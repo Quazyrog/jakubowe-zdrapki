@@ -14,10 +14,9 @@
     background: #FFE9B1;
     margin: 12px;
     flex: 1;
-    min-height: 12em;
     display: grid;
     grid-template-areas: "DayNum DayName" "Month Month" "Task Task";
-    grid-template-columns: 2em 1fr;
+    grid-template-columns: 4em 1fr;
     grid-template-rows: auto auto 1fr;
     border: 2px solid var(--the-day-colour-fg);
     word-break: break-word;
@@ -55,6 +54,7 @@
     grid-area: Task;
     padding: 5px;
     text-align: center;
+    min-height: 12em;
 }
 
 .Week .Day.Today {
@@ -87,6 +87,6 @@
         display: grid;
         grid-template-areas: "Monday Tuesday" "Wednesday Thursday" "Friday Saturday" "Sunday Sunday";
         grid-template-columns: 1fr 1fr;
-        margin-bottom: 10px;
+        margin-bottom: 1em;
     }
 }
