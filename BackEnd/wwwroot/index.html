@@ -137,7 +137,7 @@
                 dayClasses.push('Today');
                 console.log(day);
                 document.getElementById('scratchie_today').textContent = day.name;
-                document.getElementById('scratchie_task').textContent = day.taskText;
+                document.getElementById('scratchie_task').innerHTML = day.taskText;
             }
             if (day.date <= todayDate) {
                 dayClasses.push(doneDays.isDayTaskDone(day.date) ? 'Done' : 'Missed');

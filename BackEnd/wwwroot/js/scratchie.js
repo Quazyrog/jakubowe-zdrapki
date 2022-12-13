@@ -14,6 +14,7 @@ function showScratchcard(onShown) {
     
     const canvas = document.getElementById('scratchie_canvas');
     canvas.style.opacity = '1';
+    canvas.style.display = 'initial';
     const rect = canvas.getBoundingClientRect();
     console.log(rect);
     canvas.width = Math.round(rect.right - rect.left);
@@ -86,6 +87,7 @@ function showScratchcard(onShown) {
         filledInPixels = filledInPixels || 0;
         if (filledInPixels > 60) {
             canvas.style.opacity = '0';
+            setTimeout(() => canvas.style.display = 'none', 1000);
             overlay.onclick = function () {
                 overlay.style.display = 'none';
                 container.style.display = 'none';
