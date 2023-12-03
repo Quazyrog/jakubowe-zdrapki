@@ -150,20 +150,15 @@
     
     function handleClick(event)
     {
-        const todayDate = getTodayDate();
-        const yesterdayDate = getTodayDate();
-        yesterdayDate.setDate(yesterdayDate.getDate() - 1);
         const clickedDate = new Date(this.dataset.date);
-        if (yesterdayDate <= clickedDate && clickedDate <= todayDate) {
-            if (doneDays.isDayTaskDone(clickedDate)) {
-                doneDays.markTaskNotDone(clickedDate);
-                this.classList.remove('Done');
-                this.classList.add('Missed');
-            } else {
-                doneDays.markTaskDone(clickedDate);
-                this.classList.remove('Missed');
-                this.classList.add('Done');
-            }
+        if (doneDays.isDayTaskDone(clickedDate)) {
+            doneDays.markTaskNotDone(clickedDate);
+            this.classList.remove('Done');
+            this.classList.add('Missed');
+        } else {
+            doneDays.markTaskDone(clickedDate);
+            this.classList.remove('Missed');
+            this.classList.add('Done');
         }
     }
     
