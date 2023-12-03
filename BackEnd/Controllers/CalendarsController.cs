@@ -33,21 +33,14 @@ public class CalendarsController : ControllerBase
 {
     static string[] _tasks = new String[]
     {
-        "Podziękuj Bogu za dar życia",
-        "Zaplanuj dziś 15 min na modlitwę w ciągu dnia",
-        "Zaplanuj odpowiednio długi i dobry sen",
-        "Zaplanuj przynajmniej 30 min odpoczynku w ciągu dnia",
-        "Ogranicz dzisiaj korzystanie z mediów społecznościowych do niezbędnego minimum",
-        "Obejrzyj film z watykańskiej listy filmowej",
-        "Odmów koronkę do Bożego Miłosierdzia w intencji dusz czyśćcowych",
-        "Zadbaj o odświętny strój na Mszy",
-        "Podziękuj rodzicom za przekazanie życia i/lub pomódl się za nich",
-        "Porozmawiaj z kimś, z kim chcesz utrzymywać relację",
-        "Włącz się w akcję pomocową dla potrzebujących",
-        "Pomódl się o dar cierpliwości wobec konkretnego bliźniego",
-        "Zaplanuj z kimś wspólne czytanie Ewangelii z dnia i modlitwę",
-        "Pomódl się za kogoś, kto dziś wykonał pracę wobec Ciebie (np. sprzedawca w sklepie, kierowca autobusu, nauczyciel)",
-        "Przyjmij komunię w intencji pokoju na świecie",
+        "Zrób rachunek sumienia i zaplanuj spowiedź w najbliższym tygodniu. Pomódl się o dobrą spowiedź oraz za spowiednika.",
+        "Pójdź na spacer w ciszy (bez słuchawek, najlepiej z wyłączonym telefonem).",
+        "Przeczytaj 1 Kor 15, 9-10. Zastanów się kim jesteś (w czym czujesz się wyjątkowy) i podziękuj Bogu za to, że takim Cię stworzył.",
+        "Zaplanuj czas przed pójściem spać: ustal godzinę, kiedy skończysz pracę/naukę i zastanów się, co dla siebie w tym czasie zrobisz.",
+        "Sporządź pisemnie listę Twoich zainteresowań.",
+        "Ogranicz dzisiaj czas spędzony w Internecie do koniecznego minimum.",
+        "Zastanów się, co masz do zrobienia na kolejny tydzień, zajmij się tym dzisiaj na tyle, by jutro mieć czas wolny dla siebie.",
+        "Daj sobie przestrzeń na zadbanie o swoje pasje. Wybierz jedno z zainteresowań i spędź przy nim trochę czasu.",
     };
 
     private readonly ILogger<CalendarsController> _logger;
@@ -59,10 +52,10 @@ public class CalendarsController : ControllerBase
 
     private string dayName(DateOnly date)
     {
-        if (date == new DateOnly(2022, 11, 27)) return "I niedziela adwentu";
-        if (date == new DateOnly(2022, 12,  4)) return "II niedziela adwentu";
-        if (date == new DateOnly(2022, 12, 11)) return "III niedziela adwentu";
-        if (date == new DateOnly(2022, 12, 18)) return "IV niedziela adwentu";
+        if (date == new DateOnly(2023, 12, 3)) return "I niedziela adwentu";
+        if (date == new DateOnly(2023, 12,  10)) return "II niedziela adwentu";
+        if (date == new DateOnly(2023, 12, 17)) return "III niedziela adwentu";
+        if (date == new DateOnly(2023, 12, 24)) return "IV niedziela adwentu";
         switch (date.DayOfWeek)
         {
             case DayOfWeek.Sunday: return "Niedziela";
@@ -81,7 +74,7 @@ public class CalendarsController : ControllerBase
     public IEnumerable<DayInfo> Get(string name)
     {
         List<DayInfo> result = new List<DayInfo>();
-        DateOnly day = new DateOnly(2022, 11, 27);
+        DateOnly day = new DateOnly(2023, 12, 3);
         DateOnly today = DateOnly.FromDateTime(DateTime.Now);
         
         var pl = new CultureInfo("PL-pl");
