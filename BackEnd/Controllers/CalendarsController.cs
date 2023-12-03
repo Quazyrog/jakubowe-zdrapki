@@ -80,7 +80,7 @@ public class CalendarsController : ControllerBase
         var pl = new CultureInfo("PL-pl");
         var info = pl.DateTimeFormat;
 
-        for (int i = 0; i < 28; ++i)
+        for (int i = 0; i < 22; ++i)
         {
             DayInfo dayInfo = new DayInfo(day, dayName(day));
             if (i < _tasks.Length && day <= today)
