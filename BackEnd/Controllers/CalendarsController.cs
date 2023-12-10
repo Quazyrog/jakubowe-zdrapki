@@ -41,6 +41,23 @@ public class CalendarsController : ControllerBase
         "Ogranicz dzisiaj czas spędzony w Internecie do koniecznego minimum.",
         "Zastanów się, co masz do zrobienia na kolejny tydzień, zajmij się tym dzisiaj na tyle, by jutro mieć czas wolny dla siebie.",
         "Daj sobie przestrzeń na zadbanie o swoje pasje. Wybierz jedno z zainteresowań i spędź przy nim trochę czasu.",
+
+                
+        "Zaplanuj czas ze swoim przyjacielem, z którym dawno się nie widziałeś.",
+        "Zastanów się w jaki sposób spotkanie z ludźmi pomogło Ci się zbliżyć do Boga i podziękuj mu za to. Rozważ Syr, 22,23.",
+        "Przeczytaj Łk, 6, 31. Przygotuj coś miłego dla kogoś z kim wiesz, że dziś się spotkasz.",
+        "Pomódl się o dar cierpliwości wobec konkretnego bliźniego.",
+        "Podejmij dodatkowe wyrzeczenie w intencji osoby potrzebującej z Twojego otoczenia.",
+        "Zadzwoń do rodziców lub dziadków i poświęć im trochę czasu.",
+        "Zaplanuj z kimś wspólne czytanie Ewangelii i modlitwę.",
+
+        "Pomyśl o pewnej swojej wadzie. Powierz ją Bogu. Przez następny tydzień postaraj się nad nią pracować.",
+        "Przeczytaj dzisięjszą Ewangelię: Łk 1,5-25.",
+        "W najbliższych dniach wybierz na roraty.",
+        "Zaplanuj czas na spotkanie z Bogiem w ciszy.",
+        "Postaraj się zachować ciszę od dzisiejszej modlitwy wieczornej do jutrzejszej modlitwy porannej.",
+        "Przeczytaj Flp 2,5-11. Zastanów się jakiego Boga oczekujesz w czasie tych świąt.",
+        "Przyjdź na Mszę 15 minut wcześniej, pomyśl o minionym tygodniu, z czym przychodzisz na tą Mszę.",
     };
 
     private readonly ILogger<CalendarsController> _logger;
